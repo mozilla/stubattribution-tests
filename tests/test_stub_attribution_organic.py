@@ -1,7 +1,6 @@
-import os
 import urlparse
 
-from selenium import webdriver
+import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -9,40 +8,22 @@ from selenium.webdriver.support import expected_conditions as EC
 import querystringsafe_base64
 
 
-desired_cap = {
-    'platform': "Windows 10",
-    'browserName': "chrome",
-    'version': "54.0"
-}
-
-
-username = os.environ["SAUCE_USERNAME"]
-key = os.environ["SAUCE_ACCESS_KEY"]
-sauce_creds = ':'.join([username, key])
-
-
-driver = webdriver.Remote(
-    command_executor='http://%s@ondemand.saucelabs.com:80/wd/hub' % sauce_creds,
-    desired_capabilities=desired_cap)
-
-
-def generate_url():
-    base_url = 'www.allizom.org'
-    generated_url = "https://{}/en-US/".format(
+def generate_url(base_url):
+    generated_url = '{base_url}/en-US/'.format(
         base_url)
     return generated_url
 
 
-def derive_url(generated_url):
-    driver.get(generated_url)
+def derive_url(selenium, generated_url):
+    selenium.get(generated_url)
 
-    getFirefoxTodayLink = WebDriverWait(driver, 10).until(
+    getFirefoxTodayLink = WebDriverWait(selenium, 10).until(
         EC.element_to_be_clickable((By.ID, "fx-download-link")))
     getFirefoxTodayLink.click()
-    downloadButton = WebDriverWait(driver, 10).until(
+    downloadButton = WebDriverWait(selenium, 10).until(
         EC.element_to_be_clickable((By.ID, "download-button-desktop-release")))
     downloadButton.click()
-    downloadLink = driver.find_element_by_id("direct-download-link").get_attribute("href")
+    downloadLink = selenium.find_element_by_id("direct-download-link").get_attribute("href")
     print "Stub Attribution download link is:\n %s" % downloadLink
 
     return downloadLink
@@ -79,17 +60,13 @@ def assert_good(new_dict, source, medium, campaign, content):
     assert new_dict == old_dict
 
 
-def test_organic_flow_param_values(source, medium, campaign, content):
+@pytest.mark.parametriz('source, medium, campaign, content', [
+    ('www.allizom.org', 'referral', '(not set)', '(not set)')])
+def test_organic_flow_param_values(base_url, selenium, source, medium, campaign, content):
     # we:
     # 1. compare the values we expect from breaking out downloadLink in derive_url()
     # 2. ...to the utm_param_values we expect to see for source, medium, campaign, and content
-    generated_url = generate_url()
-    derived_url = derive_url(generated_url)
+    generated_url = generate_url(base_url)
+    derived_url = derive_url(selenium, generated_url)
     new_dict = breakout_utm_param_values(derived_url)
     assert_good(new_dict, source, medium, campaign, content)
-
-
-test_organic_flow_param_values("www-demo4.allizom.org", "referral", "(not set)", "(not set)")
-
-
-driver.quit()
