@@ -1,7 +1,6 @@
-import os
 import urlparse
 
-from selenium import webdriver
+import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -9,37 +8,13 @@ from selenium.webdriver.support import expected_conditions as EC
 import querystringsafe_base64
 
 
-desired_cap = {
-    'platform': "Windows 10",
-    'browserName': "chrome",
-    'version': "54.0"
-}
+def derive_url(selenium, generated_url):
+    selenium.get(generated_url)
 
-
-username = os.environ["SAUCE_USERNAME"]
-key = os.environ["SAUCE_ACCESS_KEY"]
-sauce_creds = ':'.join([username, key])
-
-
-driver = webdriver.Remote(
-    command_executor='http://%s@ondemand.saucelabs.com:80/wd/hub' % sauce_creds,
-    desired_capabilities=desired_cap)
-
-
-def generate_url(source, medium, campaign, term):
-    base_url = 'www.allizom.org'
-    generated_url = "https://{}/en-US/firefox/new/?utm_source={}&utm_medium={}&utm_campaign={}&utm_term={}".format(
-        base_url, source, medium, campaign, term)
-    return generated_url
-
-
-def derive_url(generated_url):
-    driver.get(generated_url)
-
-    downloadButton = WebDriverWait(driver, 10).until(
+    downloadButton = WebDriverWait(selenium, 10).until(
         EC.element_to_be_clickable((By.ID, "download-button-desktop-release")))
     downloadButton.click()
-    downloadLink = driver.find_element_by_id("direct-download-link").get_attribute("href")
+    downloadLink = selenium.find_element_by_id("direct-download-link").get_attribute("href")
     print "Stub Attribution download link is:\n %s" % downloadLink
 
     return downloadLink
@@ -78,14 +53,15 @@ def assert_good(new_dict, source, medium, campaign, term):
     assert new_dict == old_dict
 
 
-def test_search_flow_param_values(source, medium, campaign, term):
-    generated_url = generate_url(source, medium, campaign, term)
-    derived_url = derive_url(generated_url)
+@pytest.mark.parametrize('source, medium, campaign, term', [
+    ('google', 'paidsearch', 'Brand-US-GGL-Exact', 'download%20firefox')])
+def test_search_flow_param_values(base_url, selenium, source, medium, campaign, term):
+    generated_url = '{base_url}/en-US/firefox/new/?utm_source={source}&utm_medium={medium}&utm_campaign={campaign}&utm_term={term}'.format(
+        base_url=base_url,
+        source=source,
+        medium=medium,
+        campaign=campaign,
+        term=term)
+    derived_url = derive_url(selenium, generated_url)
     new_dict = breakout_utm_param_values(derived_url)
     assert_good(new_dict, source, medium, campaign, term)
-
-
-test_search_flow_param_values("google", "paidsearch", "Brand-US-GGL-Exact", "download%20firefox")
-
-
-driver.quit()
