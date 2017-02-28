@@ -8,12 +8,6 @@ from selenium.webdriver.support import expected_conditions as EC
 import querystringsafe_base64
 
 
-def generate_url(base_url, source, medium, campaign, term):
-    generated_url = '{base_url}/en-US/firefox/new/?utm_source={}&utm_medium={}&utm_campaign={}&utm_term={}'.format(
-        base_url, source, medium, campaign, term)
-    return generated_url
-
-
 def derive_url(selenium, generated_url):
     selenium.get(generated_url)
 
