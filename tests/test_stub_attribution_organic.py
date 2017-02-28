@@ -8,12 +8,6 @@ from selenium.webdriver.support import expected_conditions as EC
 import querystringsafe_base64
 
 
-def generate_url(base_url):
-    generated_url = '{base_url}/en-US/'.format(
-        base_url)
-    return generated_url
-
-
 def derive_url(selenium, generated_url):
     selenium.get(generated_url)
 
@@ -66,7 +60,6 @@ def test_organic_flow_param_values(base_url, selenium, source, medium, campaign,
     # we:
     # 1. compare the values we expect from breaking out downloadLink in derive_url()
     # 2. ...to the utm_param_values we expect to see for source, medium, campaign, and content
-    generated_url = generate_url(base_url)
-    derived_url = derive_url(selenium, generated_url)
+    derived_url = derive_url(selenium, '{0}/en-US/'.format(base_url))
     new_dict = breakout_utm_param_values(derived_url)
     assert_good(new_dict, source, medium, campaign, content)
