@@ -59,6 +59,7 @@ def assert_good(new_dict, source, medium, campaign, term):
     assert new_dict == old_dict
 
 
+@pytest.mark.nondestructive
 @pytest.mark.parametrize('source, medium, campaign, term', [
     ('google', 'paidsearch', 'Fake%20campaign', 'test term')])
 def test_campaign_flow_param_values(base_url, selenium, source, medium, campaign, term):

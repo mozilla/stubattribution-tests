@@ -54,6 +54,7 @@ def assert_good(new_dict, source, medium, campaign, content):
     assert new_dict == old_dict
 
 
+@pytest.mark.nondestructive
 @pytest.mark.parametrize('source, medium, campaign, content', [
     ('www.allizom.org', 'referral', '(not set)', '(not set)')])
 def test_organic_flow_param_values(base_url, selenium, source, medium, campaign, content):
