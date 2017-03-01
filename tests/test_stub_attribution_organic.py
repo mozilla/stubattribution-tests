@@ -55,12 +55,13 @@ def assert_good(new_dict, source, medium, campaign, content):
 
 
 @pytest.mark.nondestructive
-@pytest.mark.parametrize('source, medium, campaign, content', [
-    ('www.allizom.org', 'referral', '(not set)', '(not set)')])
-def test_organic_flow_param_values(base_url, selenium, source, medium, campaign, content):
+@pytest.mark.parametrize('medium, campaign, content', [
+    ('referral', '(not set)', '(not set)')])
+def test_organic_flow_param_values(base_url, selenium, medium, campaign, content):
     # we:
     # 1. compare the values we expect from breaking out downloadLink in derive_url()
     # 2. ...to the utm_param_values we expect to see for source, medium, campaign, and content
     derived_url = derive_url(selenium, '{0}/en-US/'.format(base_url))
     new_dict = breakout_utm_param_values(derived_url)
+    source = urlparse.urlparse(base_url).hostname
     assert_good(new_dict, source, medium, campaign, content)
