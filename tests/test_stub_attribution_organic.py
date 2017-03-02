@@ -47,19 +47,17 @@ def breakout_utm_param_values(generated_url):
     return equal_pieces_as_dict
 
 
-def assert_good(new_dict, source, medium, campaign, content):
-    old_dict = {'source': source, 'medium': medium, 'campaign': campaign, 'content': content}
-    print old_dict
-    print new_dict
-    assert new_dict == old_dict
-
-
-@pytest.mark.parametrize('source, medium, campaign, content', [
-    ('www.allizom.org', 'referral', '(not set)', '(not set)')])
-def test_organic_flow_param_values(base_url, selenium, source, medium, campaign, content):
+@pytest.mark.nondestructive
+def test_organic_flow_param_values(base_url, selenium):
     # we:
     # 1. compare the values we expect from breaking out downloadLink in derive_url()
     # 2. ...to the utm_param_values we expect to see for source, medium, campaign, and content
     derived_url = derive_url(selenium, '{0}/en-US/'.format(base_url))
-    new_dict = breakout_utm_param_values(derived_url)
-    assert_good(new_dict, source, medium, campaign, content)
+    expected = {
+        'source': urlparse.urlparse(base_url).hostname,
+        'medium': 'referral',
+        'campaign': '(not set)',
+        'content': '(not set)'}
+    actual = breakout_utm_param_values(derived_url)
+
+    assert actual == expected
