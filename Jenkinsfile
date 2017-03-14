@@ -10,7 +10,7 @@ def capabilities = [
 pipeline {
   agent any
   options {
-    ansiColor()
+    ansiColor('xterm')
     timestamps()
     timeout(time: 30, unit: 'MINUTES')
   }
