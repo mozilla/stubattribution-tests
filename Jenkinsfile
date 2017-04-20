@@ -1,4 +1,4 @@
-@Library('fxtest@1.5') _
+@Library('fxtest@1.6') _
 
 
 /** Desired capabilities */
@@ -17,6 +17,7 @@ pipeline {
   environment {
     /** See https://issues.jenkins-ci.org/browse/JENKINS-42771 - we'd like to expand this out into multi-line concatenations */
     PYTEST_ADDOPTS = "-n=10 --tb=short --color=yes --driver=SauceLabs --variables=capabilities.json"
+    PULSE = credentials('PULSE')
     SAUCELABS_API_KEY = credentials('SAUCELABS_API_KEY')
   }
   stages {
@@ -34,7 +35,8 @@ pipeline {
         always {
           archiveArtifacts 'results/*'
           junit 'results/*.xml'
-          submitToActiveData('results/py27.log')
+          submitToActiveData('results/py27_raw.txt')
+          submitToTreeherder('stubattribution-tests', 'e2e', 'End-to-end integration tests', 'results/*', 'results/py27_tbpl.txt')
           publishHTML(target: [
             allowMissing: false,
             alwaysLinkToLastBuild: true,
