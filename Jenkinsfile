@@ -16,11 +16,11 @@ pipeline {
   }
   environment {
     PYTEST_ADDOPTS =
-    "-n=10 " +
-    "--tb=short " +
-    "--color=yes " +
-    "--driver=SauceLabs " +
-    "--variables=capabilities.json"
+      "-n=10 " +
+      "--tb=short " +
+      "--color=yes " +
+      "--driver=SauceLabs " +
+      "--variables=capabilities.json"
     PULSE = credentials('PULSE')
     SAUCELABS_API_KEY = credentials('SAUCELABS_API_KEY')
   }
