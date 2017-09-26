@@ -11,13 +11,12 @@ import querystringsafe_base64
 def derive_url(selenium, generated_url):
     selenium.get(generated_url)
 
-    getFirefoxTodayLink = WebDriverWait(selenium, 10).until(
-        EC.element_to_be_clickable((By.ID, "fx-download-link")))
-    getFirefoxTodayLink.click()
-    downloadButton = WebDriverWait(selenium, 10).until(
-        EC.element_to_be_clickable((By.ID, "download-button-desktop-release")))
-    downloadButton.click()
-    downloadLink = selenium.find_element_by_id("direct-download-link").get_attribute("href")
+    firefoxHeaderNavLink = selenium.find_element_by_css_selector('li.item-firefox')
+    firefoxHeaderNavLink.click()
+    downloadFirefoxLink = WebDriverWait(selenium, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, '#download-intro .os_win a')))
+    downloadFirefoxLink.click()
+    downloadLink = selenium.find_element_by_id('direct-download-link').get_attribute('href')
     print "Stub Attribution download link is:\n %s" % downloadLink
 
     return downloadLink
