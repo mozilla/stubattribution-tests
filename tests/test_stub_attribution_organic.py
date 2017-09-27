@@ -11,7 +11,8 @@ import querystringsafe_base64
 def derive_url(selenium, generated_url):
     selenium.get(generated_url)
 
-    firefoxHeaderNavLink = selenium.find_element_by_css_selector('li.item-firefox')
+    firefoxHeaderNavLink = WebDriverWait(selenium, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, 'li.item-firefox')))
     firefoxHeaderNavLink.click()
     downloadFirefoxLink = WebDriverWait(selenium, 10).until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, '#download-intro .os_win a')))
