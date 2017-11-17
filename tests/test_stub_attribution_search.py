@@ -15,7 +15,7 @@ def derive_url(selenium, generated_url):
         EC.element_to_be_clickable((By.ID, "download-button-desktop-release")))
     downloadButton.click()
     downloadLink = selenium.find_element_by_id("direct-download-link").get_attribute("href")
-    print "Stub Attribution download link is:\n %s" % downloadLink
+    print('Stub Attribution download link is:\n{}'.format(downloadLink))
 
     return downloadLink
 
@@ -48,8 +48,8 @@ def breakout_utm_param_values(generated_url):
 def assert_good(new_dict, source, medium, campaign, term):
     old_dict = {'source': source, 'medium': medium, 'campaign': campaign, 'term': term}
     del old_dict['term']
-    print old_dict
-    print new_dict
+    print(old_dict)
+    print(new_dict)
     assert new_dict == old_dict
 
 

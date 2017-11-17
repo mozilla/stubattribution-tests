@@ -18,7 +18,7 @@ def derive_url(selenium, generated_url):
         EC.element_to_be_clickable((By.CSS_SELECTOR, '#download-intro .os_win a')))
     downloadFirefoxLink.click()
     downloadLink = selenium.find_element_by_id('direct-download-link').get_attribute('href')
-    print "Stub Attribution download link is:\n %s" % downloadLink
+    print('Stub Attribution download link is:\n{}'.format(downloadLink))
 
     return downloadLink
 
