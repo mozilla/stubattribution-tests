@@ -1,4 +1,5 @@
 # stubattribution-tests
+[![license](https://img.shields.io/badge/license-MPL%202.0-blue.svg)](https://github.com/mozilla/stubattribution-tests/blob/master/LICENSE.txt)
 [![Build Status](https://travis-ci.org/mozilla/stubattribution-tests.svg?branch=master)](https://travis-ci.org/mozilla/stubattribution-tests)
 [![updates](https://pyup.io/repos/github/mozilla/stubattribution-tests/shield.svg)](https://pyup.io/repos/github/mozilla/stubattribution-tests/)
 [![Python 3](https://pyup.io/repos/github/mozilla/stubattribution-tests/python-3-shield.svg)](https://pyup.io/repos/github/mozilla/stubattribution-tests/)
