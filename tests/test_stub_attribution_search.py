@@ -2,21 +2,8 @@ import urlparse
 
 import pytest
 import querystringsafe_base64
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
 
-
-def derive_url(selenium, generated_url):
-    selenium.get(generated_url)
-
-    downloadButton = WebDriverWait(selenium, 10).until(
-        EC.element_to_be_clickable((By.ID, "download-button-desktop-release")))
-    downloadButton.click()
-    downloadLink = selenium.find_element_by_id("direct-download-link").get_attribute("href")
-    print('Stub Attribution download link is:\n{}'.format(downloadLink))
-
-    return downloadLink
+from pages.download import Download
 
 
 def breakout_utm_param_values(generated_url):
@@ -62,6 +49,9 @@ def test_search_flow_param_values(base_url, selenium, source, medium, campaign, 
         medium=medium,
         campaign=campaign,
         term=term)
-    derived_url = derive_url(selenium, generated_url)
+    selenium.get(generated_url)
+    page = Download(selenium)
+    page.click_download()
+    derived_url = page.download_link_location
     new_dict = breakout_utm_param_values(derived_url)
     assert_good(new_dict, source, medium, campaign, term)
