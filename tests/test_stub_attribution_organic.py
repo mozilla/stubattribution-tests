@@ -2,24 +2,8 @@ import urlparse
 
 import pytest
 import querystringsafe_base64
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
 
-
-def derive_url(selenium, generated_url):
-    selenium.get(generated_url)
-
-    firefoxHeaderNavLink = WebDriverWait(selenium, 10).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, 'li.item-firefox')))
-    firefoxHeaderNavLink.click()
-    downloadFirefoxLink = WebDriverWait(selenium, 10).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, '#download-intro .os_win a')))
-    downloadFirefoxLink.click()
-    downloadLink = selenium.find_element_by_id('direct-download-link').get_attribute('href')
-    print('Stub Attribution download link is:\n{}'.format(downloadLink))
-
-    return downloadLink
+from pages.home import Home
 
 
 def breakout_utm_param_values(generated_url):
@@ -51,7 +35,8 @@ def test_organic_flow_param_values(base_url, selenium):
     # we:
     # 1. compare the values we expect from breaking out downloadLink in derive_url()
     # 2. ...to the utm_param_values we expect to see for source, medium, campaign, and content
-    derived_url = derive_url(selenium, '{0}/en-US/'.format(base_url))
+    page = Home(selenium, base_url).open().open_firefox()
+    derived_url = page.click_download().download_link_location
     expected = {
         'source': urlparse.urlparse(base_url).hostname,
         'medium': 'referral',
