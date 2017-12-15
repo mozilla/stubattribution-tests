@@ -5,7 +5,9 @@ def capabilities = [
 ]
 
 pipeline {
-  agent any
+  agent {
+    dockerfile true
+  }
   libraries {
     lib('fxtest@1.9')
   }
@@ -28,13 +30,16 @@ pipeline {
   stages {
     stage('Lint') {
       steps {
-        sh "tox -e flake8"
+        sh "flake8"
       }
     }
     stage('Test') {
       steps {
         writeCapabilities(capabilities, 'capabilities.json')
-        sh "tox -e py27"
+        sh "pytest --junit-xml=results/py27.xml " +
+          "--html=results/py27.html --self-contained-html " +
+          "--log-raw=results/py27_raw.txt " +
+          "--log-tbpl=results/py27_tbpl.txt"
       }
       post {
         always {
