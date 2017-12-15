@@ -1,3 +1,5 @@
+flake8==3.5.0
+flake8-isort==2.2.2
 mozlog==3.5
 PyPOM==1.2.0
 pytest==3.3.1
