@@ -9,4 +9,4 @@ pytest-selenium==1.11.4
 pytest-variables==1.7.0
 pytest-xdist==1.21.0
 querystringsafe_base64==0.2.0
-selenium==3.6.0
+selenium==3.8.1
