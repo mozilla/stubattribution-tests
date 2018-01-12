@@ -34,7 +34,7 @@ downloading/running/verifying the stub-installer build.
 
 ### Clone the repository
 
-If you have cloned this project already then you can skip this, otherwise
+If you have cloned this project already, then you can skip this; otherwise
 you'll need to clone this repo using Git. If you do not know how to clone a
 GitHub repository, check out this [help page][git clone] from GitHub.
 
@@ -55,7 +55,7 @@ key = secret
 ```
 
 Then you can run the tests using [Docker][]. The `--mount` argument is
-important, as allows your `.saucelabs` to be accessed by the Docker container:
+important, as it allows your `.saucelabs` file to be accessed by the Docker container:
 
 ```
 $ docker build -t stubattribution-tests .
