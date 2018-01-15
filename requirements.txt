@@ -6,7 +6,7 @@ PyPOM==1.2.0
 pytest==3.3.2
 pytest-metadata==1.5.1
 pytest-selenium==1.11.4
-pytest-variables==1.7.0
+pytest-variables==1.7.1
 pytest-xdist==1.22.0
 querystringsafe_base64==0.2.0
 selenium==3.8.1
