@@ -9,7 +9,7 @@ pipeline {
     dockerfile true
   }
   libraries {
-    lib('fxtest@1.9')
+    lib('fxtest@1.10')
   }
   options {
     ansiColor('xterm')

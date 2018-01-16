@@ -1,5 +1,6 @@
 __pycache__
 .cache
+.git
 *.pyc
 *.tox
 results/
