@@ -39,7 +39,7 @@ pipeline {
         "--color=yes " +
         "--driver=SauceLabs " +
         "--variables=capabilities.json" +
-        ""--junit-xml=results/junit.xml "
+        ""--junit-xml=results/junit.xml " +
         "--html=results/index.html --self-contained-html " +
         "--log-raw=results/raw.txt " +
         "--log-tbpl=results/tbpl.txt"
