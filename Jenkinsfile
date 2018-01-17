@@ -34,7 +34,7 @@ pipeline {
       }
       steps {
         writeCapabilities(capabilities, 'capabilities.json')
-        sh "pytest -n=${PYTEST_PROCESSES} --tb=short --color=yes --driver=SauceLabs --variables=capabilities.json" +
+        sh "pytest -n=${PYTEST_PROCESSES} --tb=short --color=yes --driver=SauceLabs --variables=capabilities.json " +
         "--junit-xml=results/junit.xml " +
         "--html=results/index.html --self-contained-html " +
         "--log-raw=results/raw.txt " +
