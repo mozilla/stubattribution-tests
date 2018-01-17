@@ -1,5 +1,5 @@
 FROM python:2.7-alpine
-RUN apk add --update openssl
+RUN apk add --update
 WORKDIR /src
 COPY requirements.txt /src
 RUN pip install pipenv

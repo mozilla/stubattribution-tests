@@ -36,40 +36,44 @@ pipeline {
     stage('Test') {
       steps {
         writeCapabilities(capabilities, 'capabilities.json')
-        sh "pytest --junit-xml=results/py27.xml " +
-          "--html=results/py27.html --self-contained-html " +
-          "--log-raw=results/py27_raw.txt " +
-          "--log-tbpl=results/py27_tbpl.txt"
+        sh "pytest --junit-xml=results/junit.xml " +
+          "--html=results/index.html --self-contained-html " +
+          "--log-raw=results/raw.txt " +
+          "--log-tbpl=results/tbpl.txt"
       }
       post {
         always {
+          stash includes: 'results/*', name: 'results'
           archiveArtifacts 'results/*'
           junit 'results/*.xml'
-          submitToActiveData('results/py27_raw.txt')
-          submitToTreeherder('stubattribution-tests', 'e2e', 'End-to-end integration tests', 'results/*', 'results/py27_tbpl.txt')
-          publishHTML(target: [
-            allowMissing: false,
-            alwaysLinkToLastBuild: true,
-            keepAll: true,
-            reportDir: 'results',
-            reportFiles: "py27.html",
-            reportName: 'HTML Report'])
+          submitToActiveData('results/raw.txt')
+          submitToTreeherder('stubattribution-tests', 'e2e', 'End-to-end integration tests', 'results/*', 'results/tbpl.txt')
         }
       }
     }
   }
   post {
+    always
+      unstash 'results'
+      publishHTML(target: [
+        allowMissing: false,
+        alwaysLinkToLastBuild: true,
+        keepAll: true,
+        reportDir: 'results',
+        reportFiles: "index.html",
+        reportName: 'HTML Report'])
+    }
+    changed {
+      ircNotification()
+    }
     failure {
       emailext(
         attachLog: true,
-        attachmentsPattern: 'results/py27.html',
+        attachmentsPattern: 'results/index.html',
         body: '$BUILD_URL\n\n$FAILED_TESTS',
         replyTo: '$DEFAULT_REPLYTO',
         subject: '$DEFAULT_SUBJECT',
         to: '$DEFAULT_RECIPIENTS')
-    }
-    changed {
-      ircNotification()
     }
   }
 }
