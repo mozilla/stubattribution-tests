@@ -16,24 +16,30 @@ pipeline {
     timestamps()
     timeout(time: 30, unit: 'MINUTES')
   }
-  environment {
-    PYTEST_PROCESSES = "${PYTEST_PROCESSES ?: "auto"}"
-    PYTEST_ADDOPTS =
-      "-n=${PYTEST_PROCESSES} " +
-      "--tb=short " +
-      "--color=yes " +
-      "--driver=SauceLabs " +
-      "--variables=capabilities.json"
-    PULSE = credentials('PULSE')
-    SAUCELABS = credentials('SAUCELABS')
-  }
   stages {
     stage('Lint') {
+      agent {
+        dockerfile true
+      }
       steps {
         sh "flake8"
       }
     }
     stage('Test') {
+      agent {
+        dockerfile true
+      }
+      environment {
+        PYTEST_PROCESSES = "${PYTEST_PROCESSES ?: "auto"}"
+        PYTEST_ADDOPTS =
+          "-n=${PYTEST_PROCESSES} " +
+          "--tb=short " +
+          "--color=yes " +
+          "--driver=SauceLabs " +
+          "--variables=capabilities.json"
+        PULSE = credentials('PULSE')
+        SAUCELABS = credentials('SAUCELABS')
+      }
       steps {
         writeCapabilities(capabilities, 'capabilities.json')
         sh "pytest --junit-xml=results/junit.xml " +
