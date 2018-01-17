@@ -53,7 +53,7 @@ pipeline {
     }
   }
   post {
-    always
+    always {
       unstash 'results'
       publishHTML(target: [
         allowMissing: false,
