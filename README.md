@@ -74,7 +74,7 @@ required for these tests.
 
 ```
 $ pip install pipenv
-$ pipenv --two install -r requirements.txt
+$ pipenv --two install
 ```
 
 Then, you can run the tests using Pipenv:
