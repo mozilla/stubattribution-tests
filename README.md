@@ -77,12 +77,6 @@ $ pip install pipenv
 $ pipenv run pytest
 ```
 
-Then, you can run the tests using Pipenv:
-
-```
-$ pipenv run pytest
-```
-
 ## Writing tests
 
 If you want to get involved and add more tests, then there are just a few
