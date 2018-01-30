@@ -74,7 +74,7 @@ required for these tests.
 
 ```
 $ pip install pipenv
-$ pipenv --two install
+$ pipenv run pytest
 ```
 
 Then, you can run the tests using Pipenv:
