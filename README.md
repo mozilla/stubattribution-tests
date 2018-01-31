@@ -68,16 +68,7 @@ Whilst we recommend using Sauce Labs to run the tests, it's also possible to
 run them locally if you have Windows 10, [Google Chrome][], and
 [chromedriver][].
 
-Install [Pipenv][], and then using it, create a virtual environment with all
-the necessary Python package dependencies. Note that Python 2 is currently
-required for these tests.
-
-```
-$ pip install pipenv
-$ pipenv --two install -r requirements.txt
-```
-
-Then, you can run the tests using Pipenv:
+Install [Pipenv][], and then run the following command:
 
 ```
 $ pipenv run pytest

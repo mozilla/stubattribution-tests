@@ -1,0 +1,26 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[requires]
+python_version = "2.7"
+
+[dev-packages]
+
+
+
+[packages]
+
+"flake8" = "*"
+"flake8-isort" = "*"
+mozlog = "*"
+PyPOM = "*"
+pytest = "*"
+pytest-metadata = "*"
+pytest-selenium = "*"
+pytest-variables = "*"
+pytest-xdist = "*"
+"querystringsafe_base64" = "==1.0.0"
+selenium = "==3.8.1"
