@@ -127,10 +127,10 @@
         },
         "isort": {
             "hashes": [
-                "sha256:cd5d3fc2c16006b567a17193edf4ed9830d9454cbeb5a42ac80b36ea00c23db4",
-                "sha256:79f46172d3a4e2e53e7016e663cc7a8b538bec525c36675fcfd2767df30b3983"
+                "sha256:9b6963c7975c36f0cf519d26d2bdf83ce5aaa39fb5f9a514c4de1170a235a6b3",
+                "sha256:beff82862fc587bef031c8b60485e41e1362d1f1cf1904be2aefb9f0027884c7"
             ],
-            "version": "==4.2.15"
+            "version": "==4.3.0"
         },
         "mccabe": {
             "hashes": [
