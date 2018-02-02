@@ -13,8 +13,8 @@ python_version = "2.7"
 
 [packages]
 
-"flake8" = "*"
-"flake8-isort" = "*"
+flake8 = "*"
+flake8-isort = "*"
 mozlog = "*"
 PyPOM = "*"
 pytest = "*"
@@ -22,5 +22,5 @@ pytest-metadata = "*"
 pytest-selenium = "*"
 pytest-variables = "*"
 pytest-xdist = "*"
-"querystringsafe_base64" = "==1.0.0"
+querystringsafe-base64 = "==1.0.0"
 selenium = "==3.8.1"
