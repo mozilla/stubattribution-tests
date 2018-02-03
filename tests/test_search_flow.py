@@ -1,5 +1,3 @@
--*- coding: utf-8 -*-
-
 import urlparse
 
 import pytest
@@ -16,7 +14,7 @@ def breakout_utm_param_values(generated_url):
 
     # The thing is an array -- I don't know why. But there's only one element, so
     # just pick the first item off (ie ...[0])
-    attribution_code = key_value_dict['attribution_code'][0]
+    attribution_code = key_value_dict['attribution_code'][0].encode('utf-8')
     attribution_code = querystringsafe_base64.decode(attribution_code)
 
     # split on '&', into an array
