@@ -2,7 +2,6 @@ language: python
 python: 2.7
 install:
   - pip install pipenv
-  - pipenv install -r requirements.txt
 script:
   - pipenv check
   - pipenv check --style .
