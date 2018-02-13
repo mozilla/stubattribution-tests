@@ -10,7 +10,7 @@ pipeline {
     lib('fxtest@1.10')
   }
   triggers {
-    pollSCM('*/5 * * * *')
+    pollSCM('H/5 * * * *')
   }
   options {
     ansiColor('xterm')
