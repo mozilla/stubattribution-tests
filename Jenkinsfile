@@ -11,7 +11,7 @@ pipeline {
   }
   triggers {
     pollSCM('H/5 * * * *')
-    cron('H H * * *')
+    cron('H * * * *')
   }
   options {
     ansiColor('xterm')
