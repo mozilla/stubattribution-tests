@@ -9,6 +9,9 @@ pipeline {
   libraries {
     lib('fxtest@1.10')
   }
+  triggers {
+    pollSCM('*/5 * * * *')
+  }
   options {
     ansiColor('xterm')
     timestamps()
