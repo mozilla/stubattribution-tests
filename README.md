@@ -18,7 +18,7 @@ installer.
 
 ## Getting involved
 
-We love working with contributors to improve test coverage our projects, but it
+We love working with contributors to improve test coverage on our projects, but it
 does require a few skills. By contributing to our test suite you will have an
 opportunity to learn and/or improve your skills with Python, Selenium
 WebDriver, GitHub, virtual environments, the Page Object Model, and more.
