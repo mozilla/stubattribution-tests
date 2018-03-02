@@ -1,10 +1,7 @@
-FROM ubuntu:xenial
+FROM python:2.7
 WORKDIR /src
 
-RUN apt-get update \
-  && apt-get install -y curl python2.7
-RUN curl -fsSl https://bootstrap.pypa.io/get-pip.py | python2.7 \
-  && pip install pipenv
+RUN pip install pipenv
 COPY Pipfile /src/
 RUN pipenv install --system --skip-lock
 COPY . /src
