@@ -3,7 +3,7 @@ WORKDIR /src
 
 RUN pip install pipenv
 COPY Pipfile /src/
-RUN pipenv install --system --skip-lock
+RUN pipenv install --system
 COPY . /src
 
 CMD pytest --driver SauceLabs \
