@@ -38,8 +38,8 @@ def test_organic_flow_param_values(base_url, selenium):
     page = Home(selenium, base_url).open().open_firefox()
     derived_url = page.click_download().download_link_location
     expected = {
-        'source': urlparse.urlparse(base_url).hostname,
-        'medium': 'referral',
+        'source': 'www.mozilla.org',
+        'medium': '(none)',
         'campaign': '(not set)',
         'content': '(not set)'}
     actual = breakout_utm_param_values(derived_url)
