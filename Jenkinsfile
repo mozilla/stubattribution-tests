@@ -43,6 +43,7 @@ pipeline {
         sh "pytest " +
           "-n=${PYTEST_PROCESSES} " +
           "--tb=short " +
+          "--showlocals " +
           "--color=yes " +
           "--driver=SauceLabs " +
           "--variables=capabilities.json " +
