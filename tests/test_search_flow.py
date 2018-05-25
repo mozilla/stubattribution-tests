@@ -34,8 +34,6 @@ def breakout_utm_param_values(generated_url):
 def assert_good(new_dict, source, medium, campaign, term):
     old_dict = {'source': source, 'medium': medium, 'campaign': campaign, 'term': term}
     del old_dict['term']
-    print(old_dict)
-    print(new_dict)
     assert new_dict == old_dict
 
 
