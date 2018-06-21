@@ -12,7 +12,7 @@ pipeline {
     lib('fxtest@1.10')
   }
   triggers {
-    pollSCM('H/15 * * * *')
+    pollSCM('H/30 * * * *')
     cron('H * * * *')
   }
   options {
