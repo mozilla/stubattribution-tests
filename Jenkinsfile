@@ -13,7 +13,7 @@ pipeline {
   }
   triggers {
     pollSCM(env.BRANCH_NAME == 'master' ? 'H/30 * * * *' : '')
-    cron(env.BRANCH_NAME == 'master' ? 'H * * * *' : '')
+    cron(!env.containsKey('BRANCH_NAME') || env.BRANCH_NAME == 'master' ? 'H * * * *' : '')
   }
   options {
     ansiColor('xterm')
