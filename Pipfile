@@ -18,7 +18,7 @@ python_version = "2.7"
 
 flake8 = "==3.5.0"
 flake8-isort = "==2.5"
-mozlog = "==3.7"
+mozlog = "==3.8"
 PyPOM = "==2.0.0"
 pytest = "==3.6.3"
 pytest-metadata = "==1.7.0"
