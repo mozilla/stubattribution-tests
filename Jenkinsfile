@@ -44,7 +44,6 @@ pipeline {
         writeCapabilities(capabilities, 'capabilities.json')
         sh "pytest " +
           "-n=${PYTEST_PROCESSES} " +
-          "--tb=short " +
           "--showlocals " +
           "--color=yes " +
           "--driver=SauceLabs " +
