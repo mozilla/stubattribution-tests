@@ -44,4 +44,4 @@ def test_organic_flow_param_values(base_url, selenium):
         'content': '(not set)'}
     actual = breakout_utm_param_values(derived_url)
 
-    assert actual == expected
+    assert expected == actual
