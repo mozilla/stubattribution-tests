@@ -15,6 +15,7 @@ installer.
 * [Getting involved](#getting-involved)
 * [How to run the tests](#how-to-run-the-tests)
 * [Writing tests](#writing-tests)
+* [Test plan](#test-plan)
 
 ## Getting involved
 
@@ -84,6 +85,11 @@ things we'd like to ask you to do:
 3. Make sure all tests are passing, and submit a pull request.
 4. Always feel free to reach out to us and ask questions.
 
+## Test plan
+
+The current test plan can be found on the [Mozilla wiki][]. Test suites that
+require manual execution are stored in our [Testrail instance][].
+
 [guide]: http://firefox-test-engineering.readthedocs.io/en/latest/guide/index.html
 [git clone]: https://help.github.com/articles/cloning-a-repository/
 [git fork]: https://help.github.com/articles/fork-a-repo/
@@ -93,3 +99,5 @@ things we'd like to ask you to do:
 [chromedriver]: https://sites.google.com/a/chromium.org/chromedriver/
 [pipenv]: https://docs.pipenv.org/
 [style guide]: https://wiki.mozilla.org/QA/Execution/Web_Testing/Docs/Automation/StyleGuide
+[Mozilla wiki]: https://wiki.mozilla.org/Firefox/Stub_Attribution/Test_Plan
+[Testrail instance]: https://testrail.stage.mozaws.net/index.php?/projects/overview/42
