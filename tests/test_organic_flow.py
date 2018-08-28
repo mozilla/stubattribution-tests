@@ -25,7 +25,6 @@ def breakout_utm_param_values(generated_url):
     for equal_piece in equal_pieces:
         key, value = equal_piece.split('=')
         equal_pieces_as_dict[key] = value
-    del equal_pieces_as_dict['timestamp']
 
     return equal_pieces_as_dict
 
