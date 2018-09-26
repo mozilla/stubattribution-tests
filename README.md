@@ -7,8 +7,7 @@ installer.
 
 [![license](https://img.shields.io/badge/license-MPL%202.0-blue.svg)](https://github.com/mozilla/stubattribution-tests/blob/master/LICENSE.txt)
 [![travis](https://img.shields.io/travis/mozilla/stubattribution-tests.svg?label=travis)](http://travis-ci.org/mozilla/stubattribution-tests/)
-[![updates](https://pyup.io/repos/github/mozilla/stubattribution-tests/shield.svg)](https://pyup.io/repos/github/mozilla/stubattribution-tests/)
-[![Python 3](https://pyup.io/repos/github/mozilla/stubattribution-tests/python-3-shield.svg)](https://pyup.io/repos/github/mozilla/stubattribution-tests/)
+[![updates](https://api.dependabot.com/badges/status?host=github&repo=mozilla/stubattribution-tests)](https://dependabot.com)
 
 ## Table of contents:
 
