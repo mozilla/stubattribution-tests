@@ -2,7 +2,7 @@ FROM python:2.7
 WORKDIR /src
 
 COPY Pipfile pipenv.txt /src/
-RUN pip install --upgrade pip -r pipenv.txt
+RUN pip install -r pipenv.txt
 RUN pipenv install --system --skip-lock
 COPY . /src
 
