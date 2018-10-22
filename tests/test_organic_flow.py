@@ -2,6 +2,7 @@ import urlparse
 
 import pytest
 import querystringsafe_base64
+import requests
 
 from pages.home import Home
 
@@ -40,7 +41,13 @@ def test_organic_flow_param_values(base_url, selenium):
         'source': 'www.mozilla.org',
         'medium': '(none)',
         'campaign': '(not set)',
-        'content': '(not set)'}
+        'content': '(not set)'
+    }
     actual = breakout_utm_param_values(derived_url)
 
     assert expected == actual
+
+    res = requests.get(derived_url)
+
+    assert '%2528not%2Bset%2529' in res.content
+    assert 'www.mozilla.org' in res.content

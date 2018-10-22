@@ -2,6 +2,7 @@ import urlparse
 
 import pytest
 import querystringsafe_base64
+import requests
 
 from pages.download import Download
 
@@ -31,15 +32,22 @@ def breakout_utm_param_values(generated_url):
 
 
 def assert_good(new_dict, source, medium, campaign, term):
-    old_dict = {'source': source, 'medium': medium, 'campaign': campaign, 'term': term}
+    old_dict = {
+        'source': source,
+        'medium': medium,
+        'campaign': campaign,
+        'term': term
+    }
     del old_dict['term']
     assert new_dict == old_dict
 
 
 @pytest.mark.nondestructive
-@pytest.mark.parametrize('source, medium, campaign, term', [
-    ('google', 'paidsearch', 'Brand-US-GGL-Exact', 'download%20firefox')])
-def test_search_flow_param_values(base_url, selenium, source, medium, campaign, term):
+@pytest.mark.parametrize(
+    'source, medium, campaign, term',
+    [('google', 'paidsearch', 'Brand-US-GGL-Exact', 'download%20firefox')])
+def test_search_flow_param_values(base_url, selenium, source, medium, campaign,
+                                  term):
     generated_url = '{base_url}/en-US/firefox/new/?utm_source={source}&utm_medium={medium}&utm_campaign={campaign}&utm_term={term}'.format(
         base_url=base_url,
         source=source,
@@ -52,3 +60,9 @@ def test_search_flow_param_values(base_url, selenium, source, medium, campaign, 
     derived_url = page.download_link_location
     new_dict = breakout_utm_param_values(derived_url)
     assert_good(new_dict, source, medium, campaign, term)
+
+    res = requests.get(derived_url)
+
+    assert 'paidsearch' in res.content
+    assert 'google' in res.content
+    assert 'Brand-US-GGL-Exact' in res.content
