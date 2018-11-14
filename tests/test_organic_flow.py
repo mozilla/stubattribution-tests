@@ -30,6 +30,7 @@ def breakout_utm_param_values(generated_url):
     return equal_pieces_as_dict
 
 
+@pytest.mark.skip(reason="Issue 227; need nav-flow changes")
 @pytest.mark.nondestructive
 def test_organic_flow_param_values(base_url, selenium):
     # we:
