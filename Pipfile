@@ -16,7 +16,7 @@ python_version = "2.7"
 
 [packages]
 
-flake8 = "==3.7.5"
+flake8 = "==3.7.6"
 flake8-isort = "==2.6.0"
 mozlog = "==4.0"
 PyPOM = "==2.2.0"
