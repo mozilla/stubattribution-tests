@@ -32,7 +32,7 @@ funcsigs = "==1.0.2"
 
 [packages.configparser]
 
-version = "==3.5.0"
+version = "==3.7.4"
 markers = "python_version < '3.5'"
 
 
